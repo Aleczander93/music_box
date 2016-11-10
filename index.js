@@ -1,6 +1,6 @@
 var express = require("express");
 var server = express();
-var musicRouter = ('./server/routers/music.router.js');
+var albumRouter = ('./server/routers/album.router.js');
 var mongoURI = process.env.MONGOURI || require('./config.js').mongoURI;
 var mongoose = require("mongoose");
 
@@ -14,7 +14,7 @@ server.get('/', function(req, res){
   res.sendFile('public/html/index.html', {root:__dirname});
 });
 
-server.use(musicRouter);
+server.use(albumRouter);
 
 server.listen(port, function(){
   console.log('You are now listening on port...', port);
