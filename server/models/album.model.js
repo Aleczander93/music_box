@@ -5,9 +5,14 @@ var albumSchema = new Schema({
   title: {
     type: String,
     required: true
-  }
+  },
+  artist: {
+    type:String,
+    required: true
+  },
+  
 });
 
 
-var Album = mongoose.model('Music', albumSchema);
+var Album = mongoose.model('Album', albumSchema);
 module.exports = Album;
