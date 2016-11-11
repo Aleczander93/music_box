@@ -7,10 +7,18 @@ var albumSchema = new Schema({
     required: true
   },
   artist: {
-    type:String,
+    type: String,
     required: true
   },
-  
+  date: {
+    type: Date,
+    required: false
+  },
+
+  rating: {
+    value: Boolean,
+    required: false
+  }
 });
 
 
