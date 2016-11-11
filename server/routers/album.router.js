@@ -9,22 +9,23 @@ router.use(bodyParser.urlencoded({extended:true}));
 router.get('/albums/', function(req, res){
   Album.find({}, function(err, foundAlbums){
     if(err){
-      res.status(500).json({
+      return res.status(500).json({  //return infront of re.status will stop the application from running and crashing later
         err:err
       });
     }
-    res.status(200).json({
+      return res.status(200).json({
       albums:foundAlbums
     });
   });
 });
 
-router.get('/albums/:id', function(req, res){
+router.get('/albums/:id', function(req, res, next){
   Album.find({_id:req.params.id}, function(err, foundAlbum){
       if(err){
         res.status(500).json({
           err:err
         });
+        next();  //next(); will stop the application from running and crashing later
       }
       res.status(200).json({
         albums:foundAlbum
@@ -38,10 +39,11 @@ router.get('/albums/date/:date', function(req, res){
         res.status(500).json({
           err:err
         });
-      }
+      } else { // wil stop the application from running and crashing later... this is the most inuitive
       res.status(200).json({
         albums:foundAlbum
       });
+    }
   });
 });
 
@@ -85,6 +87,5 @@ router.delete('/albums/:id', function(req, res){
     });
   });
 });
-
 
 module.exports = router;
