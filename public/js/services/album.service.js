@@ -1,13 +1,13 @@
 (function() {
-  angular.modules('album-app')
+  angular.module('mean-albums')
     .factory('AlbumService', AlbumService);
 
   AlbumService.$inject = ['$http'];
 
   function AlbumService($http){
     init();
-    var albums = ();
-    return{
+    var albums = [];
+    return {
       get: getAllAlbums,
       create: createOneAlbum
     };

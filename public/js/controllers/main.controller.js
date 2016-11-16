@@ -1,8 +1,8 @@
 (function() {
-  angular.modules('album-app')
+  angular.module('mean-albums')
   .controller('MainController', MainController);
 
-  MainController.$inject = ['$scope', AlbumService];
+  MainController.$inject = ['$scope', "AlbumService"];
 
   function MainController($scope, AlbumService){
     $scope.albums = AlbumService.get();
@@ -11,7 +11,7 @@
     $scope.$watch(function(){
       return AlbumService.get();
     }, function(){
-      $scope.albums= AlbumService.get();
+      $scope.albums = AlbumService.get();
     });
 
     function createAlbum(newAlbum){
