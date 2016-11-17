@@ -9,7 +9,9 @@
     var albums = [];
     return {
       get: getAllAlbums,
-      create: createOneAlbum
+      create: createOneAlbum,
+      update: updateOneAlbum,
+      delete: deleteOneAlbum
     };
 
     function init(){
@@ -36,10 +38,26 @@
       });
     }
 
+    function updateOneAlbum(index, updateAlbum){
+      $http.put('/albums/' + updateAlbum._id, updateAlbum)
+      .then(function(response){
+        albums.splice(index, 1, updateAlbum);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
 
+    function deleteOneAlbum(index, deletedAlbum){
+
+      $http.delete('/albums/' + deletedAlbum._id)
+      .then(function(){
+        albums.splice(index, 1);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
 
   }
-
-
-
 }());

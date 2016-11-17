@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html ng-app="mean-albums">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+<link rel="stylesheet" type="text/css" href="css/main.css">
   <head>
     <title>Top Albums of All Time</title>
   </head>
+
   <body>
-    <h1 class='text-center jumbotron'>Your Top Album Choice</h1>
+    <div class='text-center page-header'>
+    <h1>Your Top Album Choice</h1>
+    </div>
 
     <div ng-controller='MainController'>
 
-      <div class='row'>
-        <div class="col-md-2 col-md-offset-5">
-          <input type="text" ng-model='newAlbum.title' placeholder="Title">
-          <input type="text" ng-model='newAlbum.artist' placeholder="Artist">
-          <input type="text" ng-model='newAlbum.date' placeholder="Date">
-          <input type="text" ng-model='newAlbum.rating' placeholder="Rating">
-          <button ng-click='createAlbum(newAlbum)'> Add new Album</button>
+        <!-- <button class=' btn btn-default' type="button" data-toggle="collapse" data-target="#albumInput" aria-expanded="true" aria-controls="albumInput">
+        Create Album Here!
+        </button> -->
+
+      <div class="text-center">
+        <div>
+          <input type="text" ng-model='newAlbum.title' placeholder="Title" style="margin-bottom: 10px;">
+          <input type="text" ng-model='newAlbum.artist' placeholder="Artist" style="margin-bottom: 10px;">
+          <input type="text" ng-model='newAlbum.date' placeholder="Date" style="margin-bottom: 10px;">
+          <input type="text" ng-model='newAlbum.rating' placeholder="Rating" style="margin-bottom: 10px;">
+          <button ng-click='createAlbum(newAlbum)' style="margin-bottom: 20px;"> Add Album </button>
         </div>
       </div>
 
       <div>
-        <ul class="list-group list-inline">
-          <li ng-repeat='album in albums track by $index' class="list-group-item">
-              <div>
-                <span>{{album.title}}</span>
-              </div>
-              <div>
-                <span>{{album.artist}}</span>
-              </div>
-              <div>
-                <span>{{album.date}}</span>
-              </div>
-              <div>
-                <span>{{album.rating}}</span>
-              </div>
+        <ul class="list-group">
+          <li ng-repeat='album in albums track by $index' class="well">
+                <input type="text" ng-show='album.isBeingEdited' ng-model='album.title'>
+                <span ng-hide='album.isBeingEdited'>{{album.title}}</span>
+                <br>
+                <input type="text" ng-show='album.isBeingEdited' ng-model='album.artist'>
+                <span ng-hide='album.isBeingEdited'>{{album.artist}}</span>
+                <br>
+                <input type="text" ng-show='album.isBeingEdited' ng-model='album.date'>
+                <span ng-hide='album.isBeingEdited'>{{album.date | date:"MM/dd/yyyy"}}</span>
+                <br>
+                <input type="text" ng-show='album.isBeingEdited' ng-model='album.rating'>
+                <span ng-hide='album.isBeingEdited'>{{album.rating}}</span>
+            <button ng-click='editAlbum(album)' ng-hide='album.isBeingEdited'>Edit</button>
+            <button ng-click='saveAlbum($index, album)' ng-show='album.isBeingEdited'>Save</button>
+            <button ng-click='deleteAlbum($index, album)'>&times;</button>
           </li>
         </ul>
       </div>
